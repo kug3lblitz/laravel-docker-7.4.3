@@ -16,5 +16,15 @@ once we're in the shell, run ``` composer create-project laravel/laravel . ```
 To serve the thing, cd into the laravel directory, and run ```php artisan serve --host=0.0.0.0 --port=8000```
 The site should now be accessible at localhost:8000, per the mapping in docker-compose.yml
 
-I'm getting a lot of errors trying to get a particular project working, but I guess this is more of a laravel issue than an environment
-issue at this point.
+For an existing project that I'm using this for, I ran into a "cache" error. I resolved this by deleting the vendor/ directory,
+and also running ```mkdir -p storage/framework/views```, in order to create a missing path required by config/view.php.
+
+Copy over your .env file and update the database params like the following, and you should be able to run migrations:
+```
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=laravel
+DB_USERNAME=root
+DB_PASSWORD=root
+```
